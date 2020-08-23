@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:glocapp/pages/BudgetScreen.dart';
+import 'package:glocapp/Widgets/Form.dart';
 
-class Navigation extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new NavigationState();
+    return new MainScreenState();
   }
 }
 
-class NavigationState extends State<Navigation> with SingleTickerProviderStateMixin {
+class MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
@@ -25,20 +25,11 @@ class NavigationState extends State<Navigation> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Glocapp"),
-        elevation: 0.7,
-        actions: <Widget>[
-          Icon(Icons.search),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          ),
-          Icon(Icons.more_vert)
-        ],
+        title: Image.asset('assets/images/glocapp_white.png', fit: BoxFit.contain, width: 150),
       ),
       body: Center(child: BudgetScreen()),
       drawer: Drawer(
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
@@ -56,8 +47,7 @@ class NavigationState extends State<Navigation> with SingleTickerProviderStateMi
             ListTile(
               title: Text('Item 2'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pop(context);
               },
             ),
           ],
