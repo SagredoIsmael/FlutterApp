@@ -10,18 +10,15 @@ class Navigation extends StatefulWidget {
 }
 
 class NavigationState extends State<Navigation> with SingleTickerProviderStateMixin {
-  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(vsync: this, length: 3);
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
-    super.dispose();
+      super.dispose();
   }
 
   @override
@@ -30,15 +27,6 @@ class NavigationState extends State<Navigation> with SingleTickerProviderStateMi
       appBar: AppBar(
         title: Text("Glocapp"),
         elevation: 0.7,
-        bottom: TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.white,
-          tabs: <Widget>[
-            Tab(icon: new Icon(Icons.camera_alt), text: "WEB"),
-            Tab(text: "PRESUPUESTO", icon: new Icon(Icons.camera_alt)),
-            Tab(text: "CHAT", icon: new Icon(Icons.camera_alt)),
-          ],
-        ),
         actions: <Widget>[
           Icon(Icons.search),
           Padding(
@@ -47,13 +35,33 @@ class NavigationState extends State<Navigation> with SingleTickerProviderStateMi
           Icon(Icons.more_vert)
         ],
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          BudgetScreen(),
-          BudgetScreen(),
-          BudgetScreen()
-        ],
+      body: Center(child: BudgetScreen()),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,
